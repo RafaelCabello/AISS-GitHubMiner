@@ -1,7 +1,6 @@
 package aiss.githubminer.service;
 
 import aiss.githubminer.model.CommentSearch;
-import aiss.githubminer.model.IssueSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +29,7 @@ public class CommentService {
     public List<CommentSearch> findByProjectIssue(String owner, String repoName, String issueNumber, Integer maxPages){
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName + "/issues/" + issueNumber + "/comments";
 
-        String token = "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";
+        String token = "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";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);

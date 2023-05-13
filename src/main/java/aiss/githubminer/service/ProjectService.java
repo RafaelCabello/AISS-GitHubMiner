@@ -37,7 +37,7 @@ public class ProjectService {
 
     public Project getProject(String owner, String repoName, Integer maxPages) {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + "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");
+        headers.set("Authorization", "Bearer " + "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");
         HttpEntity<ProjectSearch> request = new HttpEntity<ProjectSearch>(headers);
 
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName;
@@ -113,8 +113,8 @@ public class ProjectService {
                     labels,
                     author,
                     asignee,
-                    0,
-                    0,
+                    issueSearch.getReactions().getUpvotes(),
+                    issueSearch.getReactions().getDownvotes(),
                     issueSearch.getHtml_url());
             //Add comments
             List<CommentSearch> commentsSearch = commentService.findByProjectIssue(owner, repoName, newIssue.getRefId().toString(), maxPages);

@@ -1,6 +1,5 @@
 package aiss.githubminer.service;
 
-import aiss.githubminer.model.IssueSearch;
 import aiss.githubminer.model.UserUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -10,10 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 public class UserService {
     @Autowired
@@ -22,7 +17,7 @@ public class UserService {
     public UserUnit findUser(String username) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + "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");
+        headers.set("Authorization", "Bearer " + "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");
         HttpEntity<UserUnit> request = new HttpEntity<UserUnit>(headers);
 
         String uri = "https://api.github.com/users/" + username;

@@ -49,6 +49,8 @@ public class IssueSearch {
     private Object closedAt;
     @JsonProperty("body")
     private String body;
+    @JsonProperty("reactions")
+    private Reaction reactions;
 
     @JsonProperty("id")
     public String getId() {
@@ -169,6 +171,16 @@ public class IssueSearch {
         this.body = body;
     }
 
+    @JsonProperty("reactions")
+    public Reaction getReactions() {
+        return reactions;
+    }
+
+    @JsonProperty("reactions")
+    public void setReactions(Reaction reactions) {
+        this.reactions = reactions;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -220,6 +232,10 @@ public class IssueSearch {
         sb.append("body");
         sb.append('=');
         sb.append(((this.body == null)?"<null>":this.body));
+        sb.append(',');
+        sb.append("reactions");
+        sb.append('=');
+        sb.append(((this.reactions == null)?"<null>":this.reactions));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
