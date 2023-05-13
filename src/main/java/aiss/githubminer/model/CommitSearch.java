@@ -9,24 +9,34 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+    "sha",
     "commit",
     "html_url",
 })
 @Generated("jsonschema2pojo")
 public class CommitSearch {
-
+    @JsonProperty("sha")
+    private String sha;
     @JsonProperty("commit")
-    private Commit commit;
+    private CommitUnit commit;
     @JsonProperty("html_url")
     private String htmlUrl;
 
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) { this.sha = sha; }
+
     @JsonProperty("commit")
-    public Commit getCommit() {
+    public CommitUnit getCommit() {
         return commit;
     }
 
     @JsonProperty("commit")
-    public void setCommit(Commit commit) {
+    public void setCommit(CommitUnit commit) {
         this.commit = commit;
     }
 
@@ -44,6 +54,10 @@ public class CommitSearch {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(CommitSearch.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("sha");
+        sb.append('=');
+        sb.append(((this.sha == null)?"<null>":this.sha));
+        sb.append(',');
         sb.append("commit");
         sb.append('=');
         sb.append(((this.commit == null)?"<null>":this.commit));

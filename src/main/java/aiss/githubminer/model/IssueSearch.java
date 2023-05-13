@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "id",
     "number",
+    "html_url",
     "title",
     "user",
     "labels",
@@ -27,11 +28,13 @@ public class IssueSearch {
     @JsonProperty("id")
     private String id;
     @JsonProperty("number")
-    private Integer number;
+    private String number;
+    @JsonProperty("html_url")
+    private String html_url;
     @JsonProperty("title")
     private String title;
     @JsonProperty("user")
-    private User user;
+    private UserSearch user;
     @JsonProperty("labels")
     private List<Label> labels;
     @JsonProperty("state")
@@ -58,13 +61,22 @@ public class IssueSearch {
     }
 
     @JsonProperty("number")
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
     @JsonProperty("number")
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
+    }
+    @JsonProperty("html_url")
+    public String getHtml_url() {
+        return html_url;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtml_url(String html_url) {
+        this.html_url = html_url;
     }
 
     @JsonProperty("title")
@@ -78,12 +90,12 @@ public class IssueSearch {
     }
 
     @JsonProperty("user")
-    public User getUser() {
+    public UserSearch getUser() {
         return user;
     }
 
     @JsonProperty("user")
-    public void setUser(User user) {
+    public void setUser(UserSearch user) {
         this.user = user;
     }
 
@@ -168,6 +180,10 @@ public class IssueSearch {
         sb.append("number");
         sb.append('=');
         sb.append(((this.number == null)?"<null>":this.number));
+        sb.append(',');
+        sb.append("html_url");
+        sb.append('=');
+        sb.append(((this.html_url == null)?"<null>":this.html_url));
         sb.append(',');
         sb.append("title");
         sb.append('=');

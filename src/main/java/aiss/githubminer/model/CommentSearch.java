@@ -21,7 +21,7 @@ public class CommentSearch {
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("user")
-    private User user;
+    private UserSearch user;
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("updated_at")
@@ -50,12 +50,12 @@ public class CommentSearch {
     }
 
     @JsonProperty("user")
-    public User getUser() {
+    public UserSearch getUser() {
         return user;
     }
 
     @JsonProperty("user")
-    public void setUser(User user) {
+    public void setUser(UserSearch user) {
         this.user = user;
     }
 
