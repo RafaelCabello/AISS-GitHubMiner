@@ -26,13 +26,11 @@ public class CommentService {
         return comments;
     }
 
-    public List<CommentSearch> findByProjectIssue(String owner, String repoName, String issueNumber, Integer maxPages){
+    public List<CommentSearch> findByProjectIssue(String owner, String repoName, String issueNumber, Integer maxPages, String token){
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName + "/issues/" + issueNumber + "/comments";
 
-        String token = "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";
-
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
+        headers.set("Authorization", token);
         HttpEntity<CommentSearch[]> request = new HttpEntity<>(null, headers);
 
         ResponseEntity<CommentSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentSearch[].class);

@@ -14,10 +14,10 @@ public class UserService {
     @Autowired
     RestTemplate restTemplate;
 
-    public UserUnit findUser(String username) {
+    public UserUnit findUser(String username, String token) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + "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");
+        headers.set("Authorization", token);
         HttpEntity<UserUnit> request = new HttpEntity<UserUnit>(headers);
 
         String uri = "https://api.github.com/users/" + username;

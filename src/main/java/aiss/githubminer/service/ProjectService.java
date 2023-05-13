@@ -35,9 +35,9 @@ public class ProjectService {
         return projectSearch;
     }
 
-    public Project getProject(String owner, String repoName, Integer maxPages) {
+    public Project getProject(String owner, String repoName, Integer maxPages, String token) {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + "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");
+        headers.set("Authorization", token);
         HttpEntity<ProjectSearch> request = new HttpEntity<ProjectSearch>(headers);
 
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName;
@@ -46,7 +46,7 @@ public class ProjectService {
         Project project = new Project(projectSearch.getId().toString(), projectSearch.getName(), projectSearch.getHtmlUrl());
 
         //Add commits
-        List<CommitSearch> commitsSearch = commitService.findProjectCommits(owner, repoName, maxPages);
+        List<CommitSearch> commitsSearch = commitService.findProjectCommits(owner, repoName, maxPages, token);
         List<Commit> commits = new ArrayList<>();
         for (CommitSearch commitSearch: commitsSearch) {
             String titulo = commitSearch.getCommit().getMessage().split("\n")[0];
@@ -68,7 +68,7 @@ public class ProjectService {
 
         //Add issues
 
-        List<IssueSearch> issuesSearch = issueService.findByProject(owner, repoName, maxPages);
+        List<IssueSearch> issuesSearch = issueService.findByProject(owner, repoName, maxPages, token);
         List<Issue> issues = new ArrayList<>();
         for (IssueSearch issueSearch: issuesSearch) {
             // control closedAt null
@@ -84,7 +84,7 @@ public class ProjectService {
             }
 
             //buscar author
-            UserUnit foundUser = userService.findUser(issueSearch.getUser().getLogin());
+            UserUnit foundUser = userService.findUser(issueSearch.getUser().getLogin(), token);
             User author = new User(foundUser.getId(),
                     foundUser.getLogin(),
                     foundUser.getName(),
@@ -94,7 +94,7 @@ public class ProjectService {
             //buscar asignee
             User asignee = null;
             if (issueSearch.getAssignee() != null) {
-                UserUnit foundAsignee = userService.findUser(issueSearch.getUser().getLogin());
+                UserUnit foundAsignee = userService.findUser(issueSearch.getUser().getLogin(), token);
                 asignee = new User(foundUser.getId(),
                         foundUser.getLogin(),
                         foundUser.getName(),
@@ -117,11 +117,11 @@ public class ProjectService {
                     issueSearch.getReactions().getDownvotes(),
                     issueSearch.getHtml_url());
             //Add comments
-            List<CommentSearch> commentsSearch = commentService.findByProjectIssue(owner, repoName, newIssue.getRefId().toString(), maxPages);
+            List<CommentSearch> commentsSearch = commentService.findByProjectIssue(owner, repoName, newIssue.getRefId().toString(), maxPages, token);
             List<Comment> comments = new ArrayList<>();
             for (CommentSearch commentSearch: commentsSearch) {
                 //buscar commentAuthor
-                UserUnit commentAuthor = userService.findUser(commentSearch.getUser().getLogin());
+                UserUnit commentAuthor = userService.findUser(commentSearch.getUser().getLogin(), token);
                 User newAuthor = new User(foundUser.getId(),
                         foundUser.getLogin(),
                         foundUser.getName(),

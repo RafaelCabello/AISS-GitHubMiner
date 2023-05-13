@@ -27,13 +27,11 @@ public class CommitService {
         return commits;
     }
 
-    public List<CommitSearch> findProjectCommits(String owner, String repoName, Integer maxPages) {
+    public List<CommitSearch> findProjectCommits(String owner, String repoName, Integer maxPages, String token) {
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName + "/commits";
 
-        String token = "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";
-
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer" + token);
+        headers.set("Authorization", token);
         HttpEntity<CommitSearch[]> request = new HttpEntity<>(null, headers);
 
         ResponseEntity<CommitSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommitSearch[].class);

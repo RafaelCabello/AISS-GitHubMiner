@@ -26,13 +26,11 @@ public class IssueService {
         return issues;
     }
 
-    public List<IssueSearch> findByProject(String owner, String repoName, Integer maxPages){
+    public List<IssueSearch> findByProject(String owner, String repoName, Integer maxPages, String token){
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName + "/issues";
 
-        String token = "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";
-
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer" + token);
+        headers.set("Authorization", token);
         HttpEntity<IssueSearch[]> request = new HttpEntity<>(null, headers);
 
         ResponseEntity<IssueSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, IssueSearch[].class);
