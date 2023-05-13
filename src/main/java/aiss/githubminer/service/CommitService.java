@@ -30,7 +30,7 @@ public class CommitService {
     public List<CommitSearch> findProjectCommits(String owner, String repoName, Integer maxPages) {
         String uri = "https://api.github.com/repos/" + owner + "/" + repoName + "/commits";
 
-        String token = "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";
+        String token = "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";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer" + token);

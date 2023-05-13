@@ -17,7 +17,7 @@ public class UserService {
     public UserUnit findUser(String username) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + "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");
+        headers.set("Authorization", "Bearer " + "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");
         HttpEntity<UserUnit> request = new HttpEntity<UserUnit>(headers);
 
         String uri = "https://api.github.com/users/" + username;
