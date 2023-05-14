@@ -95,11 +95,11 @@ public class ProjectService {
             User asignee = null;
             if (issueSearch.getAssignee() != null) {
                 UserUnit foundAsignee = userService.findUser(issueSearch.getUser().getLogin(), token);
-                asignee = new User(foundUser.getId(),
-                        foundUser.getLogin(),
-                        foundUser.getName(),
-                        foundUser.getAvatarUrl(),
-                        foundUser.getHtmlUrl());
+                asignee = new User(foundAsignee.getId(),
+                        foundAsignee.getLogin(),
+                        foundAsignee.getName(),
+                        foundAsignee.getAvatarUrl(),
+                        foundAsignee.getHtmlUrl());
             }
 
             Issue newIssue = new Issue(issueSearch.getId(),
@@ -122,11 +122,11 @@ public class ProjectService {
             for (CommentSearch commentSearch: commentsSearch) {
                 //buscar commentAuthor
                 UserUnit commentAuthor = userService.findUser(commentSearch.getUser().getLogin(), token);
-                User newAuthor = new User(foundUser.getId(),
-                        foundUser.getLogin(),
-                        foundUser.getName(),
-                        foundUser.getAvatarUrl(),
-                        foundUser.getHtmlUrl());
+                User newAuthor = new User(commentAuthor.getId(),
+                        commentAuthor.getLogin(),
+                        commentAuthor.getName(),
+                        commentAuthor.getAvatarUrl(),
+                        commentAuthor.getHtmlUrl());
 
                 Comment newComment = new Comment(
                         commentSearch.getId().toString(),
